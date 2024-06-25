@@ -281,6 +281,9 @@ void handle_serial(){
             playSound = true;
             digitalWrite(AMP_SHDN, LOW);
         break;
+        case '2':
+            playLed = true;
+        break;
 
     }
 }
