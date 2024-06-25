@@ -14,7 +14,7 @@ key = 'SUPER_SECURE_KEY'
 def open_fsinf():
     content = request.json
     if content['key'] != key:
-        print("err:nope")
+        print('err:nope')
         return 'err:nope', 400
     ser.write(b'O')
     return 'Opened', 200
@@ -24,7 +24,7 @@ def open_fsinf():
 def close_fsinf():
     content = request.json
     if content['key'] != key:
-        print("err:nope")
+        print('err:nope')
         return 'err:nope', 400
     ser.write(b'C')
     return 'Closed', 200
@@ -33,7 +33,7 @@ def close_fsinf():
 def play_fsinf():
     content = request.json
     if content['key'] != key:
-        print("err:nope")
+        print('err:nope')
         return 'err:nope', 400
     ser.write(b'1')
     return 'Play', 200
@@ -42,7 +42,7 @@ def play_fsinf():
 def led_fsinf():
     content = request.json
     if content['key'] != key:
-        print("err:nope")
+        print('err:nope')
         return 'err:nope', 400
     ser.write(b'2')
     return 'Led', 200
@@ -51,7 +51,7 @@ def led_fsinf():
 def mattermost_fsinf():
     content = request.form
     if content['token'] != key:
-        print("err:nope")
+        print('err:nope')
         return 'err:nope', 400
 
     if 'open' == content['text']:
@@ -63,7 +63,7 @@ def mattermost_fsinf():
     elif 'led' == content['text']:
         ser.write(b'2')
     else:
-        print("err:unknown")
+        print('err:unknown')
         return 'err:unknown', 400
     return '# mode set', 200
 
