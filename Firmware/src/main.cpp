@@ -274,7 +274,7 @@ void handle_serial(){
         break;
         case 'C':
         case 'c':
-            is_fsinf_open = true;
+            is_fsinf_open = false;
             set_top_leds(CRGB::Red);
         break;
         case '1':
