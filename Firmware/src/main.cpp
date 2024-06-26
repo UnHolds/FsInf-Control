@@ -24,6 +24,7 @@ SPIClass *vspi = new SPIClass(VSPI);
 
 #define BOUNCE_TIME 5
 
+
 //state vars
 bool is_fsinf_open = false;
 int is_fsinf_open_buffer = 0;
@@ -67,9 +68,9 @@ void set_top_leds(CRGB color){
 }
 
 void setup() {
+
     vspi->begin();
     pinMode(CS_PIN, OUTPUT);
-
 
     pinMode(BTN_1, INPUT);
     pinMode(BTN_2, INPUT);
@@ -77,7 +78,7 @@ void setup() {
     pinMode(BTN_4, INPUT);
 
     pinMode(AMP_SHDN, OUTPUT);
-    digitalWrite(AMP_SHDN, LOW);
+    digitalWrite(AMP_SHDN, HIGH);
 
     Serial.begin(115200);
 
@@ -106,7 +107,7 @@ void sendAudioData(){
         leds[0] = CRGB::Black;
         leds[1] = CRGB::Black;
         led_change = true;
-        digitalWrite(AMP_SHDN, LOW);
+        digitalWrite(AMP_SHDN, HIGH);
     }
 }
 
@@ -277,12 +278,39 @@ void handle_serial(){
             is_fsinf_open = false;
             set_top_leds(CRGB::Red);
         break;
-        case '1':
+        case 'M':
+        case 'm':
             playSound = true;
             digitalWrite(AMP_SHDN, LOW);
         break;
-        case '2':
+        case 'L':
+        case 'l':
             playLed = true;
+        break;
+        case '0':
+            dim_value = 0;
+            FastLED.setBrightness(32 + (50 * dim_value));
+            led_change = true;
+        break;
+        case '1':
+            dim_value = 1;
+            FastLED.setBrightness(32 + (50 * dim_value));
+            led_change = true;
+        break;
+        case '2':
+            dim_value = 2;
+            FastLED.setBrightness(32 + (50 * dim_value));
+            led_change = true;
+        break;
+        case '3':
+            dim_value = 3;
+            FastLED.setBrightness(32 + (50 * dim_value));
+            led_change = true;
+        break;
+        case '4':
+            dim_value = 4;
+            FastLED.setBrightness(32 + (50 * dim_value));
+            led_change = true;
         break;
 
     }
@@ -314,5 +342,8 @@ void loop()
     {
         timing = currentTime;
         sendAudioData();
+    }else if (!playSound){
+        vTaskDelay(portTICK_PERIOD_MS * 100);
     }
+
 }
