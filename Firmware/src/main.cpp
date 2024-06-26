@@ -24,6 +24,9 @@ SPIClass *vspi = new SPIClass(VSPI);
 
 #define BOUNCE_TIME 5
 
+#define uS_TO_mS_FACTOR 1000
+#define TIME_TO_SLEEP  10 //ms
+
 
 //state vars
 bool is_fsinf_open = false;
@@ -68,6 +71,8 @@ void set_top_leds(CRGB color){
 }
 
 void setup() {
+
+    esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP * uS_TO_mS_FACTOR);
 
     vspi->begin();
     pinMode(CS_PIN, OUTPUT);
@@ -343,7 +348,7 @@ void loop()
         timing = currentTime;
         sendAudioData();
     }else if (!playSound){
-        vTaskDelay(portTICK_PERIOD_MS * 100);
+        esp_light_sleep_start();
     }
 
 }
