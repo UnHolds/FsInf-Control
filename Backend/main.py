@@ -59,9 +59,19 @@ def mattermost_fsinf():
     elif 'close' == content['text']:
         ser.write(b'C')
     elif 'play' == content['text']:
-        ser.write(b'1')
+        ser.write(b'M')
     elif 'led' == content['text']:
+        ser.write(b'L')
+    elif '0' == content['text']:
+        ser.write(b'0')
+    elif '1' == content['text']:
+        ser.write(b'1')
+    elif '2' == content['text']:
         ser.write(b'2')
+    elif '3' == content['text']:
+        ser.write(b'3')
+    elif '4' == content['text']:
+        ser.write(b'4')
     else:
         print('err:unknown')
         return 'err:unknown', 400
