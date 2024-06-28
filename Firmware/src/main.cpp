@@ -348,7 +348,7 @@ void loop()
         timing = currentTime;
         sendAudioData();
     }else if (!playSound){
-        esp_light_sleep_start();
+       //esp_light_sleep_start();
     }
 
 }
