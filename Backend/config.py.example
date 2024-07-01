@@ -1,0 +1,8 @@
+# config
+
+# direct access
+key = 'SUPER_SECURE_KEY'
+
+# mm token
+mmtoken = 'SUPER_SECURE_KEY'
+

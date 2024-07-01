@@ -3,17 +3,16 @@ import serial
 import threading
 import requests
 
+import config
+
 ser = serial.Serial('/dev/ttyUSB0', baudrate=115200)
 app = Flask(__name__)
 open = False
 
-key = 'SUPER_SECURE_KEY'
-
-
 @app.route('/open', methods=['POST'])
 def open_fsinf():
     content = request.json
-    if content['key'] != key:
+    if content['key'] != config.key:
         print('err:nope')
         return 'err:nope', 400
     ser.write(b'O')
@@ -23,7 +22,7 @@ def open_fsinf():
 @app.route('/close', methods=['POST'])
 def close_fsinf():
     content = request.json
-    if content['key'] != key:
+    if content['key'] != config.key:
         print('err:nope')
         return 'err:nope', 400
     ser.write(b'C')
@@ -32,7 +31,7 @@ def close_fsinf():
 @app.route('/play', methods=['POST'])
 def play_fsinf():
     content = request.json
-    if content['key'] != key:
+    if content['key'] != config.key:
         print('err:nope')
         return 'err:nope', 400
     ser.write(b'1')
@@ -41,7 +40,7 @@ def play_fsinf():
 @app.route('/led', methods=['POST'])
 def led_fsinf():
     content = request.json
-    if content['key'] != key:
+    if content['key'] != config.key:
         print('err:nope')
         return 'err:nope', 400
     ser.write(b'2')
@@ -50,7 +49,7 @@ def led_fsinf():
 @app.route('/mattermost', methods=['POST'])
 def mattermost_fsinf():
     content = request.form
-    if content['token'] != key:
+    if content['token'] != config.mmtoken:
         print('err:nope')
         return 'err:nope', 400
 
