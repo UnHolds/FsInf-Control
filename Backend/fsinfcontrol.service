@@ -1,0 +1,9 @@
+[Service]                                                                                                                                                        
+WorkingDirectory=/root/FsInf-Control/Backend                                                                                                                        
+ExecStart=/usr/bin/python3 main.py                                                                                                                                  
+Restart=always                                                                                                                                                   
+RestartSec=10s                                                                                                                                                   
+                                                                                                                                                                 
+[Install]                                                                                                                                                        
+WantedBy=multi-user.target                                                                                                                                       
+
